@@ -1,0 +1,825 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #1d2435 0%, #0f1117 55%);
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 22px 15px;
+  background: #171b26;
+  color: #ffb347;
+  border-bottom: 1px solid #2b3245;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin: 8px 0 0;
+  color: #d7dce8;
+  font-size: 15px;
+}
+
+.container {
+  width: 95%;
+  max-width: 1250px;
+  margin: auto;
+  padding: 14px 0 30px;
+}
+
+.card {
+  background: rgba(23, 27, 38, 0.96);
+  padding: 17px;
+  margin: 15px 0;
+  border-radius: 14px;
+  border: 1px solid #2b3245;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.28);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #ffd166;
+}
+
+button {
+  background: #3a86ff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.03);
+  opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-principal {
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+  background: #ff9f1c;
+  color: #111;
+}
+
+.btn-secundario {
+  background: #2c3448;
+  color: #ffffff;
+  border: 1px solid #45506a;
+}
+
+.btn-peligro,
+.btnEliminar {
+  background: #ff3b3b;
+  color: white;
+}
+
+.btnEliminar {
+  padding: 6px 9px;
+}
+
+.btn-rojo {
+  background: #ff3b3b;
+}
+
+.btn-azul {
+  background: #3a86ff;
+}
+
+.btn-empate {
+  background: #ffd166;
+  color: #111;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="datetime-local"],
+select {
+  padding: 11px;
+  border-radius: 9px;
+  border: 1px solid #2b3245;
+  outline: none;
+  width: 100%;
+  background: #0d1320;
+  color: #ffffff;
+  font-size: 15px;
+}
+
+input[type="text"],
+input[type="password"] {
+  background: #f4f6fb;
+  color: #111;
+  border: none;
+}
+
+.agregar-jugador,
+.admin-login {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.agregar-jugador {
+  grid-template-columns: 1fr auto;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.ayuda {
+  color: #b8c0d4;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+/* ================= ADMIN ================= */
+
+.admin-card {
+  border: 2px solid #ffd166;
+}
+
+.estado-admin {
+  padding: 10px;
+  border-radius: 9px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.estado-admin.bloqueado {
+  background: rgba(255, 59, 59, 0.14);
+  border: 1px solid #ff3b3b;
+  color: #ffb3b3;
+}
+
+.estado-admin.activo {
+  background: rgba(0, 200, 120, 0.14);
+  border: 1px solid #00c878;
+  color: #a8ffd6;
+}
+
+.bloqueado-admin {
+  opacity: 0.45;
+  filter: grayscale(0.4);
+}
+
+/* ================= MAPAS ================= */
+
+.mapas-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(180px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.card label {
+  display: block;
+  cursor: pointer;
+  font-size: 16px;
+  background: #202636;
+  padding: 10px;
+  border-radius: 9px;
+  border: 1px solid #2b3245;
+}
+
+.card label:hover {
+  border-color: #3a86ff;
+}
+
+.card label input {
+  transform: scale(1.12);
+  margin-right: 7px;
+}
+
+.resultado-mapas-card {
+  border: 2px solid #ffd166;
+  background: linear-gradient(135deg, rgba(23, 27, 38, 0.98), rgba(48, 40, 20, 0.95));
+}
+
+.resultado {
+  margin-top: 12px;
+  font-size: 20px;
+  line-height: 1.8;
+  color: #ffffff;
+}
+
+.resultado strong {
+  color: #ffd166;
+}
+
+.mapa-ganador {
+  padding: 10px;
+  margin: 8px 0;
+  background: #202636;
+  border-radius: 9px;
+  border-left: 5px solid #ffd166;
+  animation: aparecer 0.3s ease;
+}
+
+/* ================= PANEL BOMBOS ================= */
+
+.panel-bombos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.bombo-panel {
+  min-height: 120px;
+  background: #101725;
+  border: 1px dashed #45506a;
+  border-radius: 12px;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.bombo-panel.drag-over {
+  border-color: #ffd166;
+  box-shadow: 0 0 16px rgba(255, 209, 102, 0.25);
+}
+
+.bombo-panel h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #ffd166;
+}
+
+.bombo-contador {
+  font-size: 12px;
+  color: #b8c0d4;
+  margin-left: 5px;
+}
+
+.player-token {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  margin: 7px 0;
+  background: #202636;
+  border: 1px solid #2b3245;
+  border-radius: 10px;
+  cursor: grab;
+  animation: aparecer 0.2s ease;
+}
+
+.player-token:active {
+  cursor: grabbing;
+}
+
+.player-token.no-juega {
+  opacity: 0.55;
+}
+
+.player-token .nombre {
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.player-token .bombo-mobile {
+  grid-column: 1 / -1;
+  padding: 7px;
+  font-size: 13px;
+}
+
+/* ================= RULETA 1 VS 1 VISUAL ================= */
+
+.ruleta-card {
+  border: 1px solid #3a86ff;
+}
+
+.duel-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 330px;
+  gap: 18px;
+  align-items: center;
+}
+
+.ruleta-container {
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle, rgba(58,134,255,0.19), rgba(13,19,32,0.95) 64%),
+    #0d1320;
+  border: 2px solid #3a86ff;
+  border-radius: 22px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.duel-pointer {
+  position: absolute;
+  top: 12px;
+  z-index: 5;
+  font-size: 46px;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.95),
+    0 4px 8px rgba(0,0,0,0.85);
+  filter: drop-shadow(0 0 10px #ffd166);
+}
+
+.duel-wheel {
+  width: min(520px, 86vw);
+  height: min(520px, 86vw);
+  max-height: 360px;
+  max-width: 360px;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  border: 8px solid rgba(255,255,255,0.2);
+  box-shadow:
+    0 0 35px rgba(58,134,255,0.45),
+    0 0 45px rgba(255,59,59,0.35),
+    inset 0 0 30px rgba(0,0,0,0.55);
+  background: #111827;
+}
+
+.duel-wheel::before {
+  content: "";
+  position: absolute;
+  inset: -16px;
+  border-radius: 50%;
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(58,134,255,0.0),
+      rgba(58,134,255,0.75),
+      rgba(255,209,102,0.45),
+      rgba(255,59,59,0.75),
+      rgba(58,134,255,0.0)
+    );
+  animation: haloGiro 5s linear infinite;
+  z-index: 0;
+}
+
+.duel-wheel::after {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.25);
+  box-shadow: inset 0 0 22px rgba(255,255,255,0.12);
+  z-index: 3;
+  pointer-events: none;
+}
+
+.wheel-half {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  text-align: center;
+  padding: 26px;
+  transition: 0.25s ease;
+}
+
+.wheel-left {
+  left: 0;
+  background:
+    radial-gradient(circle at 30% 35%, rgba(255,255,255,0.35), transparent 22%),
+    linear-gradient(135deg, #7dd3fc 0%, #2563eb 55%, #0f172a 100%);
+  border-right: 2px solid rgba(255,255,255,0.8);
+}
+
+.wheel-right {
+  right: 0;
+  background:
+    radial-gradient(circle at 70% 35%, rgba(255,255,255,0.25), transparent 22%),
+    linear-gradient(225deg, #fb923c 0%, #dc2626 55%, #111827 100%);
+  border-left: 2px solid rgba(255,255,255,0.8);
+}
+
+.wheel-half span {
+  display: block;
+  color: #ffffff;
+  font-size: clamp(24px, 4vw, 42px);
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-shadow:
+    0 4px 10px rgba(0,0,0,0.9),
+    0 0 14px rgba(255,255,255,0.35);
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.wheel-left span {
+  transform: translateX(10px);
+}
+
+.wheel-right span {
+  transform: translateX(-10px);
+}
+
+.wheel-center {
+  position: absolute;
+  z-index: 4;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 25%, #ffffff, #475569 25%, #0f172a 72%);
+  border: 4px solid rgba(255,255,255,0.4);
+  color: #ffd166;
+  font-size: 26px;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow:
+    0 0 16px rgba(0,0,0,0.75),
+    0 0 16px rgba(255,209,102,0.35);
+}
+
+.ruleta-container.ruleta-activa .duel-wheel {
+  animation: spinDuel 0.38s linear infinite;
+}
+
+.duel-wheel.winner-left .wheel-left {
+  filter: brightness(1.35) saturate(1.25);
+  box-shadow: inset 0 0 40px rgba(255,255,255,0.35);
+}
+
+.duel-wheel.winner-left .wheel-left span {
+  color: #ff3b3b;
+  text-shadow:
+    0 0 12px #ffffff,
+    0 0 25px rgba(255,59,59,1),
+    0 4px 10px rgba(0,0,0,0.9);
+}
+
+.duel-wheel.winner-right .wheel-right {
+  filter: brightness(1.35) saturate(1.25);
+  box-shadow: inset 0 0 40px rgba(255,255,255,0.35);
+}
+
+.duel-wheel.winner-right .wheel-right span {
+  color: #ff3b3b;
+  text-shadow:
+    0 0 12px #ffffff,
+    0 0 25px rgba(255,59,59,1),
+    0 4px 10px rgba(0,0,0,0.9);
+}
+
+.duel-info {
+  background: #101725;
+  border: 1px solid #2b3245;
+  border-radius: 14px;
+  padding: 15px;
+  line-height: 1.5;
+}
+
+.duel-info h3 {
+  margin-top: 0;
+  color: #ffd166;
+}
+
+#ruleta {
+  min-height: 54px;
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: #202636;
+  border: 1px solid #2b3245;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+#ruleta.texto-ganador {
+  color: #ff3b3b;
+  text-shadow:
+    0 0 16px rgba(255, 59, 59, 0.95),
+    0 0 4px #fff;
+}
+
+@keyframes spinDuel {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes haloGiro {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ================= EQUIPOS ================= */
+
+.equipos {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.equipo {
+  flex: 1;
+  min-width: 260px;
+  background: #202636;
+  padding: 15px;
+  border-radius: 13px;
+}
+
+.equipo.rojo {
+  border: 2px solid #ff3b3b;
+}
+
+.equipo.azul {
+  border: 2px solid #3a86ff;
+}
+
+.equipo h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.equipo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.equipo li {
+  padding: 9px;
+  margin-bottom: 7px;
+  background: #2c3448;
+  border-radius: 9px;
+  font-weight: bold;
+  animation: aparecer 0.3s ease;
+}
+
+@keyframes aparecer {
+  from {
+    transform: translateY(8px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ================= GANADOR / MANUAL ================= */
+
+.partida-actual {
+  background: #202636;
+  border: 1px solid #2b3245;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 12px 0;
+  line-height: 1.7;
+}
+
+.ganador-botones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.ganador-botones button {
+  font-size: 16px;
+}
+
+.manual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.manual-grid h3 {
+  margin: 0 0 8px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 110px;
+  resize: vertical;
+  padding: 11px;
+  border-radius: 9px;
+  border: 1px solid #2b3245;
+  outline: none;
+  background: #0d1320;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
+
+textarea:focus,
+.manual-opciones select:focus,
+.manual-opciones input:focus {
+  border-color: #3a86ff;
+}
+
+.manual-opciones {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.manual-opciones label {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 6px;
+  color: #ffd166;
+  font-weight: bold;
+}
+
+#inputImportarBackup {
+  background: #202636;
+  border: 1px solid #2b3245;
+  padding: 9px;
+  border-radius: 9px;
+  color: #ffffff;
+}
+
+/* ================= TABLAS ================= */
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  min-width: 660px;
+}
+
+th,
+td {
+  border: 1px solid #2b3245;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: #0d1320;
+  color: #ffd166;
+}
+
+td {
+  background: #202636;
+}
+
+td:first-child {
+  font-weight: bold;
+  text-align: left;
+}
+
+.mapa-ranking-card {
+  background: #101725;
+  border: 1px solid #2b3245;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px 0;
+}
+
+.mapa-ranking-card h3 {
+  margin-top: 0;
+  color: #ffd166;
+}
+
+/* ================= HISTORIAL ================= */
+
+.historial-item {
+  background: #202636;
+  border: 1px solid #2b3245;
+  border-radius: 10px;
+  padding: 10px;
+  margin-top: 8px;
+  color: #e8ecf6;
+  line-height: 1.6;
+}
+
+.historial-item small {
+  color: #ffd166;
+}
+
+.ganador-rojo {
+  color: #ff8a8a;
+  font-weight: bold;
+}
+
+.ganador-azul {
+  color: #7cb3ff;
+  font-weight: bold;
+}
+
+.ganador-empate {
+  color: #ffd166;
+  font-weight: bold;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 950px) {
+  .panel-bombos {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .manual-opciones {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 24px;
+  }
+
+  .agregar-jugador,
+  .admin-login {
+    grid-template-columns: 1fr;
+  }
+
+  .acciones button,
+  #inputImportarBackup {
+    width: 100%;
+  }
+
+  .mapas-grid,
+  .panel-bombos,
+  .manual-grid,
+  .ganador-botones {
+    grid-template-columns: 1fr;
+  }
+
+  .equipos {
+    flex-direction: column;
+  }
+
+  .duel-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .ruleta-container {
+    min-height: 330px;
+  }
+
+  .duel-wheel {
+    max-width: 300px;
+    max-height: 300px;
+  }
+
+  .wheel-center {
+    width: 72px;
+    height: 72px;
+    font-size: 22px;
+  }
+
+  #ruleta {
+    font-size: 22px;
+  }
+
+  button {
+    width: 100%;
+  }
+}
