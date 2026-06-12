@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rakion MT Sorteador Firebase</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+<header>
+  <h1>⚔️ Rakion MT Sorteador</h1>
+  <p>Ruleta real, Firebase online, ranking por mapas y panel económico</p>
+</header>
+
+<main class="container">
+
+  <section class="card alerta-card" id="firebaseAviso">
+    <h2>🔥 Estado de Firebase</h2>
+    <p id="estadoFirebase">Verificando configuración...</p>
+  </section>
+
+  <!-- ================= ADMIN ================= -->
+  <section class="card admin-card">
+    <h2>🔐 Panel de administrador</h2>
+
+    <p class="ayuda">
+      Los visitantes pueden ver datos. Solo el administrador puede agregar jugadores, mover bombos, registrar, editar o eliminar resultados.
+    </p>
+
+    <div class="admin-login">
+      <input id="adminEmail" type="email" placeholder="Correo administrador Firebase" />
+      <input id="adminPassword" type="password" placeholder="Contraseña Firebase" />
+      <input id="adminPin" type="password" placeholder="Código admin: 015" />
+      <button id="btnEntrarAdmin">🔓 Entrar</button>
+      <button id="btnSalirAdmin" class="btn-secundario">🔒 Salir</button>
+    </div>
+
+    <div id="estadoAdmin" class="estado-admin bloqueado">
+      Modo visitante: puedes ver ranking, historial y realizar sorteos visuales, pero no guardar cambios.
+    </div>
+
+    <p class="ayuda" id="uidAdminInfo"></p>
+  </section>
+
+  <!-- ================= MAPAS ================= -->
+  <section class="card">
+    <h2>🗺️ Sorteo de Mapas</h2>
+
+    <p class="ayuda">
+      El sorteo siempre se realiza entre los 4 mapas oficiales. Se elige Mapa 1 y Mapa 2 para la serie ida y vuelta.
+    </p>
+
+    <div class="mapas-grid fija">
+      <div class="mapa-chip">AnotherTomb</div>
+      <div class="mapa-chip">Lost Temple</div>
+      <div class="mapa-chip">Templo Serpiente</div>
+      <div class="mapa-chip">Tumba del Rey</div>
+    </div>
+
+    <button id="btnSortearMapa">🎲 Sortear Mapa 1 y Mapa 2</button>
+  </section>
+
+  <!-- ================= JUGADORES Y BOMBOS ================= -->
+  <section class="card">
+    <h2>👥 Participantes y Bombos</h2>
+
+    <p class="ayuda">
+      Ya no necesitas marcar casilleros. Solo participan los jugadores que estén dentro de un bombo. Los que quedan en “Sin bombo” no se sortean.
+    </p>
+
+    <div class="agregar-jugador">
+      <input id="nuevoJugador" type="text" placeholder="Nombre del jugador" />
+      <button id="btnAgregar">➕ Agregar</button>
+    </div>
+
+    <div class="acciones">
+      <button id="btnLimpiarBombos" class="btn-secundario">📌 Enviar todos a Sin bombo</button>
+    </div>
+
+    <div id="panelBombos" class="panel-bombos"></div>
+  </section>
+
+  <!-- ================= RULETA ================= -->
+  <section class="card ruleta-card" id="seccionRuleta">
+    <h2>🎡 Ruleta visual real</h2>
+
+    <div class="duel-layout">
+      <div class="ruleta-container">
+        <div class="duel-pointer">▼</div>
+
+        <svg id="wheelSvg" class="wheel-svg" viewBox="-260 -260 520 520" aria-label="Ruleta">
+          <g id="wheelGroup"></g>
+          <circle class="wheel-inner-ring" cx="0" cy="0" r="224"></circle>
+          <circle class="wheel-center-bg" cx="0" cy="0" r="54"></circle>
+          <text id="wheelCenterText" class="wheel-center-text" x="0" y="9">VS</text>
+        </svg>
+      </div>
+
+      <div class="duel-info">
+        <h3>⚔️ Sorteo actual</h3>
+        <p id="ruleta">Listo</p>
+        <small>Durante el giro solo se muestra “Girando…”. Al final aparece el ganador real.</small>
+      </div>
+    </div>
+
+    <button id="btnSortear" class="btn-principal">🚀 Iniciar Sorteo de Equipos</button>
+    <button id="btnLimpiarEquipos" class="btn-secundario">🧹 Limpiar equipos</button>
+  </section>
+
+  <!-- ================= RESULTADO MAPAS ================= -->
+  <section class="card resultado-mapas-card">
+    <h2>🗺️ Mapas de la serie</h2>
+    <div id="resultadoMapas" class="resultado">
+      Todavía no se sortearon mapas.
+    </div>
+  </section>
+
+  <!-- ================= EQUIPOS ================= -->
+  <section class="card equipos">
+    <div class="equipo rojo">
+      <h3>🟥 ROJO</h3>
+      <ul id="equipoRojo"></ul>
+    </div>
+
+    <div class="equipo azul">
+      <h3>🟦 AZUL</h3>
+      <ul id="equipoAzul"></ul>
+    </div>
+  </section>
+
+  <!-- ================= REGISTRAR SERIE ================= -->
+  <section class="card">
+    <h2>🏆 Registrar resultado de la serie</h2>
+
+    <p class="ayuda">
+      La serie se juega ida y vuelta: Mapa 1 dos veces y Mapa 2 dos veces. Si gana un equipo, sus jugadores suman +1 global y +1 en ambos mapas. Si hay empate, no suma nada.
+    </p>
+
+    <div id="partidaActual" class="partida-actual">
+      No hay sorteo pendiente por registrar.
+    </div>
+
+    <div class="manual-opciones">
+      <div>
+        <label for="serieMapa1">Mapa 1</label>
+        <select id="serieMapa1"></select>
+      </div>
+
+      <div>
+        <label for="serieMapa2">Mapa 2</label>
+        <select id="serieMapa2"></select>
+      </div>
+
+      <div>
+        <label for="serieResultado">Ganador de serie</label>
+        <select id="serieResultado">
+          <option value="rojo">Ganó ROJO</option>
+          <option value="azul">Ganó AZUL</option>
+          <option value="empate">Empate</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="serieMarcador">Marcador</label>
+        <select id="serieMarcador">
+          <option value="3-0">3 - 0</option>
+          <option value="3-1">3 - 1</option>
+          <option value="2-2">2 - 2 / Empate</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="btnRegistrarSerie" class="btn-principal">💾 Registrar serie actual</button>
+  </section>
+
+  <!-- ================= MANUAL ================= -->
+  <section class="card">
+    <h2>✍️ Registrar o editar resultado manual</h2>
+
+    <p class="ayuda">
+      Sirve para resultados antiguos. También aquí aparecerán los datos cuando presiones “Editar” en el historial.
+    </p>
+
+    <div id="modoEdicion" class="modo-edicion oculto">
+      Editando resultado existente.
+      <button id="btnCancelarEdicion" class="btn-secundario">Cancelar edición</button>
+    </div>
+
+    <div class="manual-grid">
+      <div>
+        <h3>🟥 Equipo Rojo</h3>
+        <textarea id="manualRojoNombres" placeholder="Ejemplo: ZANCUDO, DEMON, POLLITO"></textarea>
+      </div>
+
+      <div>
+        <h3>🟦 Equipo Azul</h3>
+        <textarea id="manualAzulNombres" placeholder="Ejemplo: MASEKU, AORUS, TIMARIUS"></textarea>
+      </div>
+    </div>
+
+    <div class="manual-opciones">
+      <div>
+        <label for="manualMapa1">Mapa 1</label>
+        <select id="manualMapa1"></select>
+      </div>
+
+      <div>
+        <label for="manualMapa2">Mapa 2</label>
+        <select id="manualMapa2"></select>
+      </div>
+
+      <div>
+        <label for="manualResultado">Ganador</label>
+        <select id="manualResultado">
+          <option value="rojo">Ganó ROJO</option>
+          <option value="azul">Ganó AZUL</option>
+          <option value="empate">Empate</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="manualMarcador">Marcador</label>
+        <select id="manualMarcador">
+          <option value="3-0">3 - 0</option>
+          <option value="3-1">3 - 1</option>
+          <option value="2-2">2 - 2 / Empate</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="manualFecha">Fecha opcional</label>
+        <input type="datetime-local" id="manualFecha" />
+      </div>
+    </div>
+
+    <button id="btnRegistrarManual" class="btn-principal">💾 Registrar resultado manual</button>
+  </section>
+
+  <!-- ================= PANEL ECONOMICO ================= -->
+  <section class="card dinero-card">
+    <h2>💰 Panel de resultados económicos</h2>
+    <p class="ayuda">
+      Cada +1 global equivale a <strong>S/. 5</strong>. Cada -1 global equivale a <strong>S/. -5</strong>.
+    </p>
+    <div id="panelDinero"></div>
+  </section>
+
+  <!-- ================= RANKING GLOBAL ================= -->
+  <section class="card">
+    <h2>📊 Ranking global de jugadores</h2>
+    <div id="rankingGlobal"></div>
+  </section>
+
+  <!-- ================= RANKING MAPAS ================= -->
+  <section class="card">
+    <h2>🗺️ Ranking por mapa</h2>
+    <div id="rankingMapas"></div>
+  </section>
+
+  <!-- ================= HISTORIAL ================= -->
+  <section class="card">
+    <h2>📜 Historial de resultados</h2>
+    <div id="historialResultados"></div>
+  </section>
+
+</main>
+
+<script type="module" src="script.js"></script>
+</body>
+</html>

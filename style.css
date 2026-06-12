@@ -1,0 +1,701 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: radial-gradient(circle at top, #1d2435 0%, #0f1117 55%);
+  color: white;
+}
+
+header {
+  text-align: center;
+  padding: 22px 15px;
+  background: #171b26;
+  color: #ffb347;
+  border-bottom: 1px solid #2b3245;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 30px;
+  letter-spacing: 1px;
+}
+
+header p {
+  margin: 8px 0 0;
+  color: #d7dce8;
+  font-size: 15px;
+}
+
+.container {
+  width: 95%;
+  max-width: 1250px;
+  margin: auto;
+  padding: 14px 0 30px;
+}
+
+.card {
+  background: rgba(23, 27, 38, 0.96);
+  padding: 17px;
+  margin: 15px 0;
+  border-radius: 14px;
+  border: 1px solid #2b3245;
+  box-shadow: 0 0 18px rgba(0, 0, 0, 0.28);
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #ffd166;
+}
+
+button {
+  background: #3a86ff;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.2s;
+}
+
+button:hover {
+  transform: scale(1.03);
+  opacity: 0.92;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-principal {
+  width: 100%;
+  font-size: 16px;
+  margin-top: 5px;
+  background: #ff9f1c;
+  color: #111;
+}
+
+.btn-secundario {
+  background: #2c3448;
+  color: #ffffff;
+  border: 1px solid #45506a;
+}
+
+.btn-peligro {
+  background: #ff3b3b;
+  color: #ffffff;
+}
+
+.btn-rojo {
+  background: #ff3b3b;
+}
+
+.btn-azul {
+  background: #3a86ff;
+}
+
+input,
+select,
+textarea {
+  padding: 11px;
+  border-radius: 9px;
+  border: 1px solid #2b3245;
+  outline: none;
+  width: 100%;
+  background: #0d1320;
+  color: #ffffff;
+  font-size: 15px;
+  font-family: Arial, sans-serif;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  background: #f4f6fb;
+  color: #111;
+  border: none;
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.ayuda {
+  color: #b8c0d4;
+  font-size: 14px;
+  margin-top: 8px;
+  line-height: 1.45;
+}
+
+.acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 10px 0;
+}
+
+.oculto {
+  display: none !important;
+}
+
+/* ================= FIREBASE / ADMIN ================= */
+
+.alerta-card {
+  border: 2px solid #3a86ff;
+}
+
+.admin-card {
+  border: 2px solid #ffd166;
+}
+
+.admin-login {
+  display: grid;
+  grid-template-columns: 1fr 1fr 160px auto auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.estado-admin,
+#estadoFirebase,
+.modo-edicion {
+  padding: 10px;
+  border-radius: 9px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+
+.estado-admin.bloqueado,
+.estado-error {
+  background: rgba(255, 59, 59, 0.14);
+  border: 1px solid #ff3b3b;
+  color: #ffb3b3;
+}
+
+.estado-admin.activo,
+.estado-ok {
+  background: rgba(0, 200, 120, 0.14);
+  border: 1px solid #00c878;
+  color: #a8ffd6;
+}
+
+.estado-cargando {
+  background: rgba(255, 209, 102, 0.14);
+  border: 1px solid #ffd166;
+  color: #ffe6a8;
+}
+
+.bloqueado-admin {
+  opacity: 0.45;
+  filter: grayscale(0.4);
+}
+
+/* ================= MAPAS ================= */
+
+.mapas-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(140px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mapa-chip {
+  background: #202636;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #2b3245;
+  text-align: center;
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.resultado-mapas-card {
+  border: 2px solid #ffd166;
+  background: linear-gradient(135deg, rgba(23, 27, 38, 0.98), rgba(48, 40, 20, 0.95));
+}
+
+.resultado {
+  margin-top: 12px;
+  font-size: 20px;
+  line-height: 1.8;
+  color: #ffffff;
+}
+
+.resultado strong {
+  color: #ffd166;
+}
+
+.mapa-ganador {
+  padding: 10px;
+  margin: 8px 0;
+  background: #202636;
+  border-radius: 9px;
+  border-left: 5px solid #ffd166;
+}
+
+/* ================= JUGADORES ================= */
+
+.agregar-jugador {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.panel-bombos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.bombo-panel {
+  min-height: 120px;
+  background: #101725;
+  border: 1px dashed #45506a;
+  border-radius: 12px;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.bombo-panel.drag-over {
+  border-color: #ffd166;
+  box-shadow: 0 0 16px rgba(255, 209, 102, 0.25);
+}
+
+.bombo-panel h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  color: #ffd166;
+}
+
+.bombo-contador {
+  font-size: 12px;
+  color: #b8c0d4;
+  margin-left: 5px;
+}
+
+.player-token {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 7px;
+  padding: 8px;
+  margin: 7px 0;
+  background: #202636;
+  border: 1px solid #2b3245;
+  border-radius: 10px;
+  cursor: grab;
+}
+
+.player-token:active {
+  cursor: grabbing;
+}
+
+.player-token .nombre {
+  font-weight: bold;
+  word-break: break-word;
+}
+
+.player-token .bombo-mobile {
+  grid-column: 1 / -1;
+  padding: 7px;
+  font-size: 13px;
+}
+
+.btnEliminar {
+  background: #ff3b3b;
+  color: #ffffff;
+  padding: 6px 9px;
+  border-radius: 8px;
+}
+
+/* ================= RULETA SVG ================= */
+
+.ruleta-card {
+  border: 1px solid #3a86ff;
+}
+
+.duel-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 330px;
+  gap: 18px;
+  align-items: center;
+}
+
+.ruleta-container {
+  min-height: 435px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(circle, rgba(58,134,255,0.19), rgba(13,19,32,0.95) 64%),
+    #0d1320;
+  border: 2px solid #3a86ff;
+  border-radius: 22px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.duel-pointer {
+  position: absolute;
+  top: 8px;
+  z-index: 10;
+  font-size: 48px;
+  line-height: 1;
+  color: #ffffff;
+  text-shadow:
+    0 0 10px rgba(255,255,255,0.95),
+    0 4px 8px rgba(0,0,0,0.85);
+  filter: drop-shadow(0 0 10px #ffd166);
+}
+
+.wheel-svg {
+  width: min(92vw, 390px);
+  height: min(92vw, 390px);
+  display: block;
+  overflow: visible;
+  filter:
+    drop-shadow(0 0 18px rgba(58,134,255,0.45))
+    drop-shadow(0 0 26px rgba(255,59,59,0.25));
+}
+
+#wheelGroup {
+  transform-origin: 0 0;
+}
+
+.ruleta-container.girando .wheel-svg {
+  filter:
+    drop-shadow(0 0 25px rgba(58,134,255,0.65))
+    drop-shadow(0 0 35px rgba(255,59,59,0.45));
+}
+
+.wheel-sector {
+  stroke: rgba(255,255,255,0.72);
+  stroke-width: 2.5;
+}
+
+.wheel-sector.winner {
+  filter: brightness(1.24);
+  stroke: #ffffff;
+  stroke-width: 4;
+}
+
+.wheel-label {
+  fill: #ffffff;
+  font-weight: 900;
+  font-size: 26px;
+  font-style: italic;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  paint-order: stroke;
+  stroke: rgba(0,0,0,0.88);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+  text-transform: uppercase;
+}
+
+.wheel-label.small {
+  font-size: 21px;
+}
+
+.wheel-label.tiny {
+  font-size: 17px;
+}
+
+.wheel-label.winner {
+  fill: #ff3b3b;
+  stroke: #ffffff;
+  stroke-width: 4px;
+}
+
+.wheel-inner-ring {
+  fill: none;
+  stroke: rgba(255,255,255,0.25);
+  stroke-width: 5;
+  pointer-events: none;
+}
+
+.wheel-center-bg {
+  fill: #0f172a;
+  stroke: rgba(255,255,255,0.45);
+  stroke-width: 5;
+  filter: drop-shadow(0 0 10px rgba(0,0,0,0.75));
+}
+
+.wheel-center-text {
+  fill: #ffd166;
+  font-size: 28px;
+  font-weight: 900;
+  text-anchor: middle;
+  paint-order: stroke;
+  stroke: rgba(0,0,0,0.65);
+  stroke-width: 3px;
+}
+
+.duel-info {
+  background: #101725;
+  border: 1px solid #2b3245;
+  border-radius: 14px;
+  padding: 15px;
+  line-height: 1.5;
+}
+
+.duel-info h3 {
+  margin-top: 0;
+  color: #ffd166;
+}
+
+#ruleta {
+  min-height: 54px;
+  font-size: 28px;
+  font-weight: 900;
+  color: #ffffff;
+  text-align: center;
+  padding: 12px;
+  border-radius: 12px;
+  background: #202636;
+  border: 1px solid #2b3245;
+  text-shadow: 0 0 10px rgba(0,0,0,0.8);
+}
+
+#ruleta.texto-ganador {
+  color: #ff3b3b;
+  text-shadow:
+    0 0 16px rgba(255, 59, 59, 0.95),
+    0 0 4px #fff;
+}
+
+/* ================= EQUIPOS ================= */
+
+.equipos {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.equipo {
+  flex: 1;
+  min-width: 260px;
+  background: #202636;
+  padding: 15px;
+  border-radius: 13px;
+}
+
+.equipo.rojo {
+  border: 2px solid #ff3b3b;
+}
+
+.equipo.azul {
+  border: 2px solid #3a86ff;
+}
+
+.equipo h3 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+
+.equipo ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.equipo li {
+  padding: 9px;
+  margin-bottom: 7px;
+  background: #2c3448;
+  border-radius: 9px;
+  font-weight: bold;
+}
+
+/* ================= FORMULARIOS / TABLAS ================= */
+
+.partida-actual {
+  background: #202636;
+  border: 1px solid #2b3245;
+  border-radius: 10px;
+  padding: 12px;
+  margin: 12px 0;
+  line-height: 1.7;
+}
+
+.manual-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 12px;
+}
+
+.manual-grid h3 {
+  margin: 0 0 8px;
+}
+
+.manual-opciones {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.manual-opciones label {
+  display: block;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 6px;
+  color: #ffd166;
+  font-weight: bold;
+}
+
+.modo-edicion {
+  background: rgba(255, 209, 102, 0.14);
+  border: 1px solid #ffd166;
+  color: #ffe6a8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.tabla-contenedor {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 12px;
+  min-width: 760px;
+}
+
+th,
+td {
+  border: 1px solid #2b3245;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background: #0d1320;
+  color: #ffd166;
+}
+
+td {
+  background: #202636;
+}
+
+td:first-child {
+  font-weight: bold;
+  text-align: left;
+}
+
+.texto-verde,
+.saldo-positivo {
+  color: #00e58a;
+  font-weight: bold;
+}
+
+.texto-rojo,
+.saldo-negativo {
+  color: #ff6969;
+  font-weight: bold;
+}
+
+.saldo-cero {
+  color: #d7dce8;
+  font-weight: bold;
+}
+
+.dinero-card {
+  border: 2px solid #00c878;
+}
+
+.historial-item,
+.mapa-ranking-card {
+  background: #101725;
+  border: 1px solid #2b3245;
+  border-radius: 12px;
+  padding: 12px;
+  margin: 12px 0;
+  line-height: 1.6;
+}
+
+.historial-item small {
+  color: #ffd166;
+}
+
+.historial-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 1050px) {
+  .admin-login,
+  .manual-opciones {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .duel-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .panel-bombos,
+  .mapas-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 24px;
+  }
+
+  .admin-login,
+  .agregar-jugador,
+  .panel-bombos,
+  .mapas-grid,
+  .manual-grid,
+  .manual-opciones {
+    grid-template-columns: 1fr;
+  }
+
+  .acciones button,
+  button {
+    width: 100%;
+  }
+
+  .equipos {
+    flex-direction: column;
+  }
+
+  .ruleta-container {
+    min-height: 330px;
+  }
+
+  .wheel-svg {
+    width: min(88vw, 310px);
+    height: min(88vw, 310px);
+  }
+
+  #ruleta {
+    font-size: 22px;
+  }
+}
